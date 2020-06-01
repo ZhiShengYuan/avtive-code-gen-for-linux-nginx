@@ -96,7 +96,6 @@ void MakeSomeNewGen(string time,string uuid)//CreatGen
         days[i] = time[i];//copy string
     }
     string activationKey = days;
-    bool ans = 0;
     ofstream WriteGen;
     WriteGen.open("index.html");
     WriteGen << "you can only use it after"<<GetNowTime()<<" one hour <br>\n";
@@ -119,11 +118,22 @@ void MakeSomeNewGen(string time,string uuid)//CreatGen
 int main()
 {
     system("rm -rf verify");
+#ifdef linux
     system("uuidgen > uuid.txt");//download random uuid.
+#endif
+#ifdef WIN32
+    system("powershell -Command "[guid]::NewGuid().ToString()" > uuid.txt");
+#endif // WIN32
+
     ifstream readuuid("uuid.txt");
     string t; readuuid >> t;
     readuuid.close();
+#ifdef linux
     system("rm uuid.txt");
+#endif
+#ifdef WIN32
+    system("del uuid.txt");
+#endif
     MakeSomeNewGen(GetNowTime(),t);
     return 0;
 }
