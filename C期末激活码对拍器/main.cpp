@@ -98,7 +98,7 @@ void MakeSomeNewGen(string time,string uuid)//CreatGen
     string activationKey = days;
     ofstream WriteGen;
     WriteGen.open("index.html");
-    WriteGen << "you can only use it after"<<GetNowTime()<<" one hour <br>\n";
+    WriteGen << "you can only use it after "<<GetNowTime()<<" one hour <br>\n";
     system("mkdir verify");
     for (auto h : magicNumbers)
     {
